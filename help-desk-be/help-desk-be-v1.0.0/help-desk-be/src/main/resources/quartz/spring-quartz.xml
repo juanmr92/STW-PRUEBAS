@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+	<!-- Quartz service -->
+	<bean id="QuartzService" class="com.systemlab.help_desk.service.quartz.impl.QuartzServiceImpl">
+	</bean>
+	
+	<!-- jobDetails -->
+	<bean id="RequestExpiredJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="QuartzService" />
+		<property name="targetMethod" value="requestExpired" />
+	</bean>
+	
+	<!-- triggers -->
+	<bean id="RequestExpiredTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="RequestExpiredJobDetail" />
+		<property name="cronExpression" value="0 0/2 * * * ?" />
+	</bean>
+	
+	<!-- Factory -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="RequestExpiredJobDetail" />
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="RequestExpiredTrigger" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

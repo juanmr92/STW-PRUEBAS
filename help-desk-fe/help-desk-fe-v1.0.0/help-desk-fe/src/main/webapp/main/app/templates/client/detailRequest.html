@@ -1,0 +1,78 @@
+<div class="bg-grey">
+<div class="container">
+<div class="spinner-container" ng-show="loading">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="header">
+      <h2 class="text-center">Sistema de Tickets Web</h2>
+    </div>
+    <h3 class="col-md-8 col-md-offset-2">Detalle de Ticket</h3>
+    <article class="col-md-8 col-md-offset-2">
+      <p ng-show="messageError" class="alert alert-danger" role="alert">{{messageError}}</p>
+      <p ng-show="messageInfo" class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>{{messageInfo}}
+      </p>
+      <p ng-show="messageSuccess" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>{{messageSuccess}}
+      </p>
+      <div class="panel panel-success request">
+        <div class="panel-heading text-center">
+          <span class="request-date pull-left">{{request.code}}</span> <strong>{{request.category.type | hdFtr:'request_type'}}</strong> <span class="pull-right">{{request.start_date}}</span>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="request-content">
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Estado:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.state | hdFtr:'request_state'}} <strong ng-show="request.end_date"> ({{request.end_date}})</strong></span>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Categoria:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.category.name}}</span>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Dispositivo:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.device.code}} - {{request.device.name}}</span>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Ubicación:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.device.hall.name}} - {{request.device.hall.location.name}}</span>
+                </div>
+                <div class="row">
+                  <p class="request-description col-md-12">
+                  <strong>Descripción:</strong><br>{{request.description}}</p>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <strong>Observación</strong>
+                    <textarea class="form-control" rows="3" ng-model="request.observation" placeholder="Observacion" disabled></textarea>
+                  </div>
+                </div>
+                <br>
+                <div class="col-md-12" ng-show="request.file">
+                  <a href="screenshots/{{request.file}}" download="req-{{request.file}}" class="btn btn-info">Descargar imagen</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,27 @@
+<div class="spinner-container" ng-show="loading">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
+<div class="bg-red">
+  <form class="form-login" ng-submit="loginUser()" autocomplete="off">
+    <img src="img/logo1.png" class="img-responsive" alt="logo">
+    <h1 class="text-center">Sistema de Tickets Web</h1>
+    <input type="text" class="form-control" id="account" placeholder="Usuario" ng-model="user.account" required>
+    <input type="password" class="form-control" id="password" placeholder="Contraseña" ng-model="user.password" required>
+    <p ng-show="messageError" class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{messageError}}
+    </p>
+    <button type="submit" class="btn btn-lg btn-login">Ingresar</button>
+  </form>
+  <div class="loader" layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+</div>

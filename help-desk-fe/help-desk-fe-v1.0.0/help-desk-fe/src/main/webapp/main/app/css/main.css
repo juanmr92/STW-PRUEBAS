@@ -1,0 +1,146 @@
+*{
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html, body{
+  font-family: sans-serif;
+  height: 100%;
+}
+
+.title-inline {
+  margin-top: 0;
+}
+
+.loader {
+  position: fixed;
+  flex-direction: row;
+  z-index: 100;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hd-container {
+  height: 100%;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  background-color: #fff;
+}
+
+/* ==================================================
+   Background
+================================================== */
+.bg-red {
+  background-color: #9A0024;
+}
+
+.bg-grey {
+  background-color: #F8F9F4;
+}
+
+/* ==================================================
+   Alerts
+================================================== */
+.alert {
+  margin: 5px;
+  padding: 5px 5px 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.alert .close {
+  right: 0;
+}
+
+/* ==================================================
+   Login
+================================================== */
+.form-login {
+  height: auto;
+  height: auto;
+  margin: auto;
+  max-width: 350px;
+  padding: 20px;
+}
+
+.form-login h1{
+  color: #fff;
+}
+
+.form-login img{
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.form-login input {
+  background: #fff;
+  border: none;
+  display: block;
+  height: 40px;
+  margin: auto;
+  outline: none;
+  padding: 6px 12px 6px 12px;
+  width: 100%;
+}
+
+.form-login input[type="text"] {
+  border-radius: 7px 7px 0px 0px;
+}
+
+.form-login input[type="password"] {
+  border-radius: 0px 0px 7px 7px;
+}
+
+.form-login .btn-login {
+  background: #b6ee65;
+  border-bottom: 3px solid #307d63;
+  border-radius: 7px;
+  border: none;
+  color: #51771a;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 10px;
+  outline: none;
+  padding-bottom: 14px;
+  padding-top: 14px;
+  width: 100%;
+}
+
+.form-login .btn-login:hover {
+  color: white;
+  background-color: #41AB5E;
+}
+
+/* ==================================================
+   Superadmin - CRUD
+================================================== */
+.home-superadmin {
+  margin-top: 200px;
+}
+
+.home-superadmin .options a {
+  margin-bottom: 20px;
+}
+/* ==================================================
+   Claimant - Home
+================================================== */
+.request {
+  margin-top: 10px;
+}
+
+.request-content {
+  padding-top: 20px;
+}
+
+.request-description {
+  margin-top: 15px;
+}
+

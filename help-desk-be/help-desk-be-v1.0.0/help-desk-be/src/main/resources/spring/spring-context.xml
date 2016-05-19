@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+
+	<context:component-scan base-package="com.systemlab.help_desk.controller.rest" />
+	<context:component-scan base-package="com.systemlab.help_desk.gate.impl" />
+	<context:component-scan base-package="com.systemlab.help_desk.service.business.impl" />
+	<context:component-scan base-package="com.systemlab.help_desk.service.email.impl" />
+	<context:component-scan base-package="com.systemlab.help_desk.service.file.impl" />
+	<context:component-scan base-package="com.systemlab.help_desk.service.file.impl" />
+	<context:component-scan
+		base-package="com.systemlab.help_desk.repository.hibernate.impl" />
+
+
+<!-- 	<bean id="log4jInitialization" -->
+<!-- 		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> -->
+<!-- 		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" /> -->
+<!-- 		<property name="targetMethod" value="initLogging" /> -->
+<!-- 		<property name="arguments"> -->
+<!-- 			<list> -->
+<!-- 				<value>classpath:/log4j/log4j.xml</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>10000000</value>
+		</property>
+	</bean>
+
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="localhost" />
+		<property name="port" value="25" /> 
+		<property name="username" value="help_desk@systemlab.com.pe" />
+		<property name="password" value="@help_desk" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">false</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+<!-- 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> -->
+<!-- 	<property name="host" value="mail.systemlab.com.pe" /> -->
+<!-- 	<property name="port" value="25" /> -->
+<!-- 	<property name="username" value="help_desk@systemlab.com.pe" /> -->
+<!-- 	<property name="password" value="@help_desk" /> -->
+<!-- 	<property name="javaMailProperties"> -->
+<!-- 	<props> -->
+<!-- 	<prop key="mail.transport.protocol">smtp</prop> -->
+<!-- 	<prop key="mail.smtp.auth">true</prop> -->
+<!-- 	<prop key="mail.smtp.starttls.enable">true</prop> -->
+<!-- 	<prop key="mail.debug">true</prop> -->
+<!-- 	</props> -->
+<!-- 	</property> -->
+<!-- 	</bean> -->
+
+</beans>

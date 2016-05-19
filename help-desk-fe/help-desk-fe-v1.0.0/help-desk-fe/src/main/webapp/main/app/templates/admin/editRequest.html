@@ -1,0 +1,112 @@
+<div class="bg-grey">
+<div class="container">
+<div class="spinner-container" ng-show="loading">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="header">
+      <h2 class="text-center">Sistema de Tickets Web</h2>
+    </div>
+    <br><br>
+    <article class="col-md-8 col-md-offset-2">
+      <p ng-show="messageError" class="alert alert-danger" role="alert">{{messageError}}</p>
+      <p ng-show="messageInfo" class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>{{messageInfo}}
+      </p>
+      <p ng-show="messageSuccess" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>{{messageSuccess}}
+      </p>
+      <div class="panel panel-success request">
+        <div class="panel-heading text-center">
+          <span class="request-date pull-left">{{request.code}}</span> <strong>{{request.category.type | hdFtr:'request_type'}}</strong> <span class="pull-right">{{request.start_date}}</span>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="request-content">
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Solicitante:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.user_req.name}} {{request.user_req.paternal_name}} {{request.user_req.maternal_name}}</span>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Categoria:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.category.name}}</span>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Dispositivo:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.device.code}} - {{request.device.name}}</span>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2 col-xs-12">Ubicación:</strong>
+                  <span class="col-md-8 col-xs-12">{{request.device.hall.name}} - {{request.device.hall.location.name}}</span>
+                </div>
+                <div class="row">
+                  <p class="request-description col-md-12">
+                  <strong>Descripción:</strong><br>{{request.description}}</p>
+                </div>
+                <div class="row">
+                  <strong class="request-field col-md-2">Estado:</strong>
+                  <div class="col-md-6">
+                    <select id="state" class="form-control" ng-model="request.state" required>
+                      <option value="">Seleccione Estado</option>
+                      <option value="1">Asignado</option>
+                      <option value="2">En proceso</option>
+                      <option value="3">En espera</option>
+                      <option value="5">Resuelto</option>
+                      <option value="4">No resuelto</option>
+                    </select>
+                  </div>
+                  <strong ng-show="request.end_date" class="request-field col-md-3">{{request.end_date}}</strong>
+                </div>
+                <br>
+                <div class="row">
+                  <strong class="request-field col-md-2">Operador:</strong>
+                  <div class="col-md-6">
+                    <select id="state" class="form-control" ng-model="request.user_ope.id" ng-options="operator.id as (operator.name + ' ' + operator.paternal_name + ' ' + operator.maternal_name) for operator in operatorList" class="form-control" required>
+                      <option value="">Seleccione Operador</option>
+                    </select>
+                  </div>
+                  <strong ng-show="request.end_date" class="request-field col-md-3">{{request.end_date}}</strong>
+                </div>
+                <br><br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <strong>Observación</strong>
+                    <textarea class="form-control" rows="3" ng-model="request.observation" placeholder="Observacion"></textarea>
+                  </div>
+                </div>
+                <br>
+                <div class="row" ng-show="request.file">
+                  <div class="col-md-6 col-xs-6">
+                    <a href="screenshots/{{request.file}}" download="req-{{request.file}}" class="btn btn-info">Descargar imagen</a>
+                  </div>
+                  <div class="col-md-6 col-xs-6 text-right">
+                    <button class="btn btn-success" ng-click="saveRequest()">Guardar</button>
+                  </div>
+                </div>
+                <div class="row" ng-show="!request.file">
+                  <div class="col-md-12 text-center">
+                    <button class="btn btn-success" ng-click="saveRequest()">Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</div>
+</div>

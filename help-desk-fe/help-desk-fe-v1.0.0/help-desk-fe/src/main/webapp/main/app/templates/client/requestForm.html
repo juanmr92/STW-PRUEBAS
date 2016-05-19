@@ -1,0 +1,110 @@
+<div class="bg-grey">
+<div class="container">
+<div class="spinner-container" ng-show="loading">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="header">
+      <h2 class="text-center">Sistema de Tickets Web</h2>
+    </div>
+    <br>
+    <div class="row">
+      <h3 class="col-md-12">Emitir Ticket</h3>
+    </div>
+    <br>
+    <p ng-show="messageError" class="alert alert-danger" role="alert">{{messageError}}</p>
+    <p ng-show="messageInfo" class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+        <span aria-hidden="true">&times;</span>
+      </button>{{messageInfo}}
+    </p>
+    <p ng-show="messageSuccess" class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+        <span aria-hidden="true">&times;</span>
+      </button>{{messageSuccess}}
+    </p>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form ng-submit="saveRequest()" class="form-horizontal">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="type" class="col-md-4 control-label">Tipo</label>
+                <div class="col-md-8">
+                  <select id="type" class="form-control" ng-model="request_type" ng-change="changeTypeRequest(request_type)" required>
+                    <option value="">Seleccione Tipo</option>
+                    <option value="1">Requerimiento</option>
+                    <option value="2">Incidencia</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ape_mat" class="col-md-4 control-label">Categoria</label>
+                <div class="col-md-8">
+                  <select id="type" class="form-control" ng-model="category" ng-options="category as category.name for category in categoryList" ng-change="changeCategoryRequest(category)" required>
+                    <option value="">Seleccione Categoria</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" ng-show="deviceRequired">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="location" class="col-md-2 control-label">Ubicación</label>
+                <div class="col-md-10">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <select id="location" class="form-control" ng-model="_location" ng-options="location.id as location.name for location in locationList" ng-change="changeLocationRequest(_location)" ng-required="deviceRequired">
+                        <option value="">Seleccione Pabellón</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="location" class="form-control" ng-model="hall" ng-options="hall as hall.name for hall in hallList" ng-change="changeHallRequest(hall)" ng-required="deviceRequired">
+                        <option value="">Seleccione Ambiente</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-show="deviceRequired">
+            <label for="type" class="col-md-2 control-label">Dispositivo</label>
+            <div class="col-md-4">
+              <select id="type" class="form-control" ng-model="request.device.id" ng-options="device.id as (device.name + ' ' + device.description) for device in deviceList">
+                <option value="">Seleccione Tipo</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-8 col-md-offset-2">
+              <textarea class="form-control" rows="5" ng-model="request.description" placeholder="Comentario" required></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-8 col-md-offset-2">
+              <input type="file" file-input="files" multiple/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12 text-center">
+              <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

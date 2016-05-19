@@ -1,0 +1,105 @@
+<div class="bg-grey">
+<div class="container">
+<div class="spinner-container" ng-show="loading">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Mantenimiento de Ambientes</h2>
+    <div class="panel panel-default">
+      <p ng-show="messageError" class="alert alert-danger" role="alert">{{messageError}}</p>
+      <p ng-show="messageInfo" class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>{{messageInfo}}
+      </p>
+      <p ng-show="messageSuccess" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>{{messageSuccess}}
+      </p>
+      <div class="panel-body" ng-show="step==1">
+        <button class="btn pull-right btn-default" ng-click="goAdd()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
+        </button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Pabellón</th>
+              <th>Proveedor</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(id,hall) in hallList">
+              <td>{{hall.name}}</td>
+              <td>{{hall.location.name}}</td>
+              <td>{{hall.provider | hdFtr:'provider'}}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-warning" ng-click="goEdit(hall)">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="goDelete(hall)">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-body" ng-show="step==2">
+        <ul class="col-md-12 pager">
+          <li class="previous"><a href="" ng-click="goBack()">
+            <span aria-hidden="true">&larr;</span> Atrás</a></li>
+          <li><h3 class="text-center title-inline">Agregar Ambiente</h3></li>
+        </ul>
+        <form class="form-horizontal" ng-submit="saveHall(hall)">
+          <div class="form-group">
+            <label for="name" class="col-md-2 control-label">Nombre</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="name" placeholder="Nombre" ng-model="hall.name" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="type" class="col-md-4 control-label">Proveedor</label>
+                <div class="col-md-8">
+                  <select id="type" class="form-control" ng-model="hall.provider" required>
+                    <option value="">Seleccione Proveedor</option>
+                    <option value="1">Servidesk</option>
+                    <option value="2">Microtec</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="type" class="col-md-4 control-label">Pabellón</label>
+                <div class="col-md-8">
+                  <select id="type" class="form-control" ng-model="hall.location.id" ng-options="location.id as location.name for location in locationList" required>
+                    <option value="">Seleccione Pabellón</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12 text-center">
+              <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
